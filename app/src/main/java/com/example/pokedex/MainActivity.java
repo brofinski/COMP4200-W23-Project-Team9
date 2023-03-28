@@ -32,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
         pokeData.add(new PokeData(testNum2, "Baljot"));
         pokeData.add(new PokeData(71, "Alex"));
 
+        //creating the db or loading it
+        DBHelper database = new DBHelper(getApplication(), "pokedex_database", null, 1);
+        database.getReadableDatabase();
 
         PokeListAdapter pokeListAdapter = new PokeListAdapter(pokeData, MainActivity.this);
         recyclerView.setAdapter(pokeListAdapter);
