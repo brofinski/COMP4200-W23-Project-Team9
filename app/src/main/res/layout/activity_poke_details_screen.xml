@@ -55,12 +55,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textView_pokeTypeDetailsScreen"
+            android:id="@+id/textView_pokeDescriptionDetailsScreen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
-            android:text="Type"
             android:textSize="30dp"
+            android:text="Description"
             app:layout_constraintStart_toEndOf="@+id/imageView_pokemonAvatar"
             app:layout_constraintTop_toBottomOf="@+id/textView_pokeNameDetailsScreen" />
 
@@ -72,7 +72,7 @@
             android:text="HT"
             android:textSize="30dp"
             app:layout_constraintStart_toEndOf="@+id/imageView_pokemonAvatar"
-            app:layout_constraintTop_toBottomOf="@+id/textView_pokeTypeDetailsScreen" />
+            app:layout_constraintTop_toBottomOf="@+id/textView_pokeDescriptionDetailsScreen" />
 
         <TextView
             android:id="@+id/textView_wtHardcodedBox"
@@ -126,7 +126,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/textView_pokeDescriptionDetailsScreen"
+        android:id="@+id/textView_pokeEntryDataDetailsScreen"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:textSize="30dp"

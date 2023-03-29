@@ -1,8 +1,9 @@
 package com.example.pokedex;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 
-public class PokeData {
+public class PokeData implements Serializable {
     private int pokeNum;
     private String pokeName;
     private String pokeDescription;
@@ -36,4 +37,12 @@ public class PokeData {
     public String getPokeName() {
         return this.pokeName;
     }
+
+    public String getPokeDescription() { return this.pokeDescription; }
+
+    public String getPokeEntryData() { return this.pokeEntryData; }
+
+    public float getPokeHeight() { return this.pokeHeight; }
+
+    public float getPokeWeight() { return this.pokeWeight; }
 }
