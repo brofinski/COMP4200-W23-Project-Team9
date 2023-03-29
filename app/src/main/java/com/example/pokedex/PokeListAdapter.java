@@ -41,6 +41,7 @@ public class PokeListAdapter extends RecyclerView.Adapter<PokeListAdapter.MyList
         //holder.pokeNumber.setText(String.valueOf(pokeData.getPokeNum()));
         holder.pokeNumber.setText(String.format("%03d", pokeData.getPokeNum())); //formats the num so there is always 3 digits
         holder.pokeName.setText(pokeData.getPokeName());
+        Intent intent_toPokeDetailsScreen = new Intent(context, PokeDetailsScreen.class);
 
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,7 +49,6 @@ public class PokeListAdapter extends RecyclerView.Adapter<PokeListAdapter.MyList
                 String message = "You clicked on Pokemon #" + pokeData.getPokeNum();
                 Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 
-                Intent intent_toPokeDetailsScreen = new Intent(context, PokeDetailsScreen.class);
                 // sending the PokeData object through the intent with all the info in it
                 // https://stackoverflow.com/questions/2736389/how-to-pass-an-object-from-one-activity-to-another-on-android
                 intent_toPokeDetailsScreen.putExtra("key_pokeDataObject", pokeData);
