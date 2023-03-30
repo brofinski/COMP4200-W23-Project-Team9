@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -73,5 +74,10 @@ public class MainActivity extends AppCompatActivity {
         PokeListAdapter pokeListAdapter = new PokeListAdapter(pokeData, MainActivity.this);
         recyclerView.setAdapter(pokeListAdapter);
 
+    }
+
+    public void QuitApplication(View view) {
+        MainActivity.this.finish();
+        System.exit(0);
     }
 }
