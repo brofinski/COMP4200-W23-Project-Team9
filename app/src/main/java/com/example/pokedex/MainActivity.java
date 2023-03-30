@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                         cursor.getFloat(6), cursor.getFloat(7)));
             }
         }
+        database.close();
 
         /**
         pokeData.add(new PokeData(1, "Bulbasaur", "Seed Pokemon",

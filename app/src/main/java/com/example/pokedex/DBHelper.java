@@ -50,4 +50,16 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM pokedex", null);
         return cursor;
     }
+
+    public long updatePokedexEntry(int pokemonNumber, String pokemonName, String pokemonDescription,
+                                   float pokemonHeight, float pokemonWeight, String pokemonEntryData) {
+        SQLiteDatabase sqLiteDatabase = getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name", pokemonName);
+        contentValues.put("description", pokemonDescription);
+        contentValues.put("entry_data", pokemonEntryData);
+        contentValues.put("height", pokemonHeight);
+        contentValues.put("weight", pokemonWeight);
+        return sqLiteDatabase.update("pokedex", contentValues, "number=?", new String[]{Integer.toString(pokemonNumber)});
+    }
 }

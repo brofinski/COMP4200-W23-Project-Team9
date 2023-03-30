@@ -5,16 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
 public class PokeEditDetailsScreen extends AppCompatActivity {
 
     ImageView iv_pokemonAvatar;
-    TextView tv_pokemonNumber, tv_pokemonName, tv_pokemonDescription, tv_pokemonHeight,
-            tv_pokemonWeight, tv_pokemonEntryData;
+    TextView et_pokemonNumber, et_pokemonName, et_pokemonDescription, et_pokemonHeight,
+            et_pokemonWeight, et_pokemonEntryData;
+    Button btn_confirm, btn_cancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,12 +26,14 @@ public class PokeEditDetailsScreen extends AppCompatActivity {
         setContentView(R.layout.activity_poke_edit_details_screen);
 
         iv_pokemonAvatar = findViewById(R.id.imageView_pokemonAvatarEditScreen);
-        tv_pokemonNumber = findViewById(R.id.textView_pokeNumberEditScreen);
-        tv_pokemonName = findViewById(R.id.textView_pokeNameEditScreen);
-        tv_pokemonDescription = findViewById(R.id.textView_pokeDescriptionEditScreen);
-        tv_pokemonHeight = findViewById(R.id.textView_pokeHeightEditScreen);
-        tv_pokemonWeight = findViewById(R.id.textView_pokeWeightEditScreen);
-        tv_pokemonEntryData = findViewById(R.id.textView_pokeEntryDataEditScreen);
+        et_pokemonNumber = findViewById(R.id.textView_pokeNumberEditScreen);
+        et_pokemonName = findViewById(R.id.textView_pokeNameEditScreen);
+        et_pokemonDescription = findViewById(R.id.textView_pokeDescriptionEditScreen);
+        et_pokemonHeight = findViewById(R.id.textView_pokeHeightEditScreen);
+        et_pokemonWeight = findViewById(R.id.textView_pokeWeightEditScreen);
+        et_pokemonEntryData = findViewById(R.id.textView_pokeEntryDataEditScreen);
+        btn_confirm = findViewById(R.id.button_confirmEditScreen);
+        btn_cancel = findViewById(R.id.button_cancelEditScreen);
 
         Intent intentFromPokeList = getIntent();
         PokeData receivedPokeDataObject = (PokeData) intentFromPokeList.getSerializableExtra("key_pokeDataObject");
@@ -44,11 +50,43 @@ public class PokeEditDetailsScreen extends AppCompatActivity {
             // loads a simple placeholder if the poke image could not be found
             Glide.with(this).load(R.mipmap.ic_launcher).into(iv_pokemonAvatar);
         }
-        tv_pokemonNumber.setText(String.format("%03d", receivedPokeDataObject.getPokeNum()));
-        tv_pokemonName.setText(receivedPokeDataObject.getPokeName());
-        tv_pokemonDescription.setText(receivedPokeDataObject.getPokeDescription());
-        tv_pokemonHeight.setText(Float.toString(receivedPokeDataObject.getPokeHeight()));
-        tv_pokemonWeight.setText(Float.toString(receivedPokeDataObject.getPokeWeight()));
-        tv_pokemonEntryData.setText(receivedPokeDataObject.getPokeEntryData());
+        et_pokemonNumber.setText(String.format("%03d", receivedPokeDataObject.getPokeNum()));
+        et_pokemonName.setText(receivedPokeDataObject.getPokeName());
+        et_pokemonDescription.setText(receivedPokeDataObject.getPokeDescription());
+        et_pokemonHeight.setText(Float.toString(receivedPokeDataObject.getPokeHeight()));
+        et_pokemonWeight.setText(Float.toString(receivedPokeDataObject.getPokeWeight()));
+        et_pokemonEntryData.setText(receivedPokeDataObject.getPokeEntryData());
+
+        btn_cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent_details = new Intent(PokeEditDetailsScreen.this, PokeDetailsScreen.class);
+                intent_details.putExtra("key_pokeDataObject", receivedPokeDataObject);
+                startActivity(intent_details);
+            }
+        });
+
+        btn_confirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String inputName = et_pokemonName.getText().toString();
+                String inputDescription = et_pokemonDescription.getText().toString();
+                float inputHeight = Float.parseFloat(String.valueOf(et_pokemonHeight.getText()));
+                float inputWeight = Float.parseFloat(String.valueOf(et_pokemonWeight.getText()));
+                String inputEntryData = et_pokemonEntryData.getText().toString();
+
+                DBHelper database = new DBHelper(getApplication(), "pokedex_database", null, 1);
+                database.getWritableDatabase();
+
+                long l = database.updatePokedexEntry(receivedPokeDataObject.getPokeNum(), inputName, inputDescription,
+                        inputHeight, inputWeight, inputEntryData);
+                if(l>0) {
+                    Toast.makeText(PokeEditDetailsScreen.this, "Pokemon updated!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(PokeEditDetailsScreen.this, "Unable to update!", Toast.LENGTH_SHORT).show();
+                }
+                database.close();
+            }
+        });
     }
 }
