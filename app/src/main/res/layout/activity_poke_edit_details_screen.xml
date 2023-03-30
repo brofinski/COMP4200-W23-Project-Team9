@@ -150,11 +150,11 @@
             android:layout_weight="1"
             android:text="Confirm" />
         <Button
-            android:id="@+id/button_cancelEditScreen"
+            android:id="@+id/button_backEditScreen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:text="Cancel" />
+            android:text="Back" />
     </LinearLayout>
 </LinearLayout>

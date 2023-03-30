@@ -62,4 +62,10 @@ public class DBHelper extends SQLiteOpenHelper {
         contentValues.put("weight", pokemonWeight);
         return sqLiteDatabase.update("pokedex", contentValues, "number=?", new String[]{Integer.toString(pokemonNumber)});
     }
+
+    public Cursor searchPokedexByPokemonNumber(int pokemonNumber) {
+        SQLiteDatabase sqLiteDatabase = getReadableDatabase();
+        Cursor cursor = sqLiteDatabase.rawQuery("SELECT * FROM pokedex WHERE number=?", new String[]{Integer.toString(pokemonNumber)});
+        return cursor;
+    }
 }

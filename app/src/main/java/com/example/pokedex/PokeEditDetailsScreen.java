@@ -1,8 +1,11 @@
 package com.example.pokedex;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
@@ -15,10 +18,11 @@ import com.bumptech.glide.Glide;
 
 public class PokeEditDetailsScreen extends AppCompatActivity {
 
-    ImageView iv_pokemonAvatar;
-    TextView et_pokemonNumber, et_pokemonName, et_pokemonDescription, et_pokemonHeight,
+    private ImageView iv_pokemonAvatar;
+    private TextView et_pokemonNumber, et_pokemonName, et_pokemonDescription, et_pokemonHeight,
             et_pokemonWeight, et_pokemonEntryData;
-    Button btn_confirm, btn_cancel;
+    private Button btn_confirm, btn_back;
+    private PokeData receivedPokeDataObject;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +37,10 @@ public class PokeEditDetailsScreen extends AppCompatActivity {
         et_pokemonWeight = findViewById(R.id.textView_pokeWeightEditScreen);
         et_pokemonEntryData = findViewById(R.id.textView_pokeEntryDataEditScreen);
         btn_confirm = findViewById(R.id.button_confirmEditScreen);
-        btn_cancel = findViewById(R.id.button_cancelEditScreen);
+        btn_back = findViewById(R.id.button_backEditScreen);
 
         Intent intentFromPokeList = getIntent();
-        PokeData receivedPokeDataObject = (PokeData) intentFromPokeList.getSerializableExtra("key_pokeDataObject");
+        receivedPokeDataObject = (PokeData) intentFromPokeList.getSerializableExtra("key_pokeDataObject");
 
         // setting the poke image dynamically from drawable
         // https://stackoverflow.com/questions/11737607/how-to-set-the-image-from-drawable-dynamically-in-android
@@ -57,7 +61,7 @@ public class PokeEditDetailsScreen extends AppCompatActivity {
         et_pokemonWeight.setText(Float.toString(receivedPokeDataObject.getPokeWeight()));
         et_pokemonEntryData.setText(receivedPokeDataObject.getPokeEntryData());
 
-        btn_cancel.setOnClickListener(new View.OnClickListener() {
+        btn_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent_details = new Intent(PokeEditDetailsScreen.this, PokeDetailsScreen.class);
@@ -67,6 +71,7 @@ public class PokeEditDetailsScreen extends AppCompatActivity {
         });
 
         btn_confirm.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("DefaultLocale")
             @Override
             public void onClick(View view) {
                 String inputName = et_pokemonName.getText().toString();
@@ -85,8 +90,46 @@ public class PokeEditDetailsScreen extends AppCompatActivity {
                 } else {
                     Toast.makeText(PokeEditDetailsScreen.this, "Unable to update!", Toast.LENGTH_SHORT).show();
                 }
+
+                // updating the Pokemon edit screen
+                PokeData newPokeDataObject = null;
+                Cursor cursor = database.searchPokedexByPokemonNumber(receivedPokeDataObject.getPokeNum());
+                if (cursor.getCount()==0) {
+                    Toast.makeText(PokeEditDetailsScreen.this, "Could not find the Pokemon!", Toast.LENGTH_SHORT).show();
+                } else {
+                    /**int pokeNum, pokeType1, pokeType2;
+                     String pokeName, pokeDescription, pokeEntryData;
+                     float pokeHeight, pokeWeight; **/
+                    while(cursor.moveToNext()) {
+                        //creating the new PokeData object
+                        // follows the form: int number, String name, String description,
+                        // String entry_data, int type1, int type2, float height, floatweight
+                        newPokeDataObject = new PokeData(cursor.getInt(0), cursor.getString(1), cursor.getString(2),
+                                cursor.getString(3), cursor.getInt(4), cursor.getInt(5),
+                                cursor.getFloat(6), cursor.getFloat(7));
+                    }
+                }
                 database.close();
+                et_pokemonNumber.setText(String.format("%03d", newPokeDataObject.getPokeNum()));
+                et_pokemonName.setText(newPokeDataObject.getPokeName());
+                et_pokemonDescription.setText(newPokeDataObject.getPokeDescription());
+                et_pokemonHeight.setText(Float.toString(newPokeDataObject.getPokeHeight()));
+                et_pokemonWeight.setText(Float.toString(newPokeDataObject.getPokeWeight()));
+                et_pokemonEntryData.setText(newPokeDataObject.getPokeEntryData());
+                updateTheReceivedPokeDataObject(newPokeDataObject);
             }
         });
+    }
+    /**
+    private void populateEditDetailsScreenWithPokeDataObjectInformation() {
+        String inputName = et_pokemonName.getText().toString();
+        String inputDescription = et_pokemonDescription.getText().toString();
+        float inputHeight = Float.parseFloat(String.valueOf(et_pokemonHeight.getText()));
+        float inputWeight = Float.parseFloat(String.valueOf(et_pokemonWeight.getText()));
+        String inputEntryData = et_pokemonEntryData.getText().toString();
+    }
+     **/
+    private void updateTheReceivedPokeDataObject(PokeData newPokeDataObject) {
+        this.receivedPokeDataObject = newPokeDataObject;
     }
 }
