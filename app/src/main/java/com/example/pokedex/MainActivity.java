@@ -1,5 +1,6 @@
 package com.example.pokedex;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -82,5 +83,14 @@ public class MainActivity extends AppCompatActivity {
         finishAffinity();
         //super.finish();
         //System.exit(0);
+    }
+
+    public void AboutApplicationButton(View view) {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(MainActivity.this);
+        alertDialog.setTitle("About application");
+        String aboutAppInfo = "Pokedex Application\n\nCOMP4200\nWinter 2023\nFor: Prof. Shaon Bhatta Shuvo\n\nDeveloped by:\nBaljot Hansi & Christopher Rafinski";
+        alertDialog.setMessage(aboutAppInfo);
+        alertDialog.setCancelable(true);
+        alertDialog.show();
     }
 }

@@ -48,12 +48,21 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/button_quit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="QuitApplication"
             android:text="Quit"
-            android:textSize="28dp" />
+            android:textSize="26dp" />
+
+        <Button
+            android:id="@+id/button_about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="AboutApplicationButton"
+            android:text="About"
+            android:textSize="26dp" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
