@@ -5,35 +5,29 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
-public class PokeDetailsScreen extends AppCompatActivity {
+public class PokeEditDetailsScreen extends AppCompatActivity {
 
     ImageView iv_pokemonAvatar;
     TextView tv_pokemonNumber, tv_pokemonName, tv_pokemonDescription, tv_pokemonHeight,
-        tv_pokemonWeight, tv_pokemonEntryData;
-    Button btn_back, btn_edit;
+            tv_pokemonWeight, tv_pokemonEntryData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_poke_details_screen);
+        setContentView(R.layout.activity_poke_edit_details_screen);
 
-        iv_pokemonAvatar = findViewById(R.id.imageView_pokemonAvatar);
-        tv_pokemonNumber = findViewById(R.id.textView_pokeNumberDetailsScreen);
-        tv_pokemonName = findViewById(R.id.textView_pokeNameDetailsScreen);
-        tv_pokemonDescription = findViewById(R.id.textView_pokeDescriptionDetailsScreen);
-        tv_pokemonHeight = findViewById(R.id.textView_pokeHeightDetailsScreen);
-        tv_pokemonWeight = findViewById(R.id.textView_pokeWeightDetailsScreen);
-        tv_pokemonEntryData = findViewById(R.id.textView_pokeEntryDataDetailsScreen);
-        btn_back = findViewById(R.id.button_back);
-        btn_edit = findViewById(R.id.button_edit);
+        iv_pokemonAvatar = findViewById(R.id.imageView_pokemonAvatarEditScreen);
+        tv_pokemonNumber = findViewById(R.id.textView_pokeNumberEditScreen);
+        tv_pokemonName = findViewById(R.id.textView_pokeNameEditScreen);
+        tv_pokemonDescription = findViewById(R.id.textView_pokeDescriptionEditScreen);
+        tv_pokemonHeight = findViewById(R.id.textView_pokeHeightEditScreen);
+        tv_pokemonWeight = findViewById(R.id.textView_pokeWeightEditScreen);
+        tv_pokemonEntryData = findViewById(R.id.textView_pokeEntryDataEditScreen);
 
         Intent intentFromPokeList = getIntent();
         PokeData receivedPokeDataObject = (PokeData) intentFromPokeList.getSerializableExtra("key_pokeDataObject");
@@ -56,32 +50,5 @@ public class PokeDetailsScreen extends AppCompatActivity {
         tv_pokemonHeight.setText(Float.toString(receivedPokeDataObject.getPokeHeight()));
         tv_pokemonWeight.setText(Float.toString(receivedPokeDataObject.getPokeWeight()));
         tv_pokemonEntryData.setText(receivedPokeDataObject.getPokeEntryData());
-
-        btn_back.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent_back = new Intent(PokeDetailsScreen.this, MainActivity.class);
-                startActivity(intent_back);
-            }
-        });
-
-        btn_edit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent_edit = new Intent(PokeDetailsScreen.this, PokeEditDetailsScreen.class);
-                intent_edit.putExtra("key_pokeDataObject", receivedPokeDataObject);
-                startActivity(intent_edit);
-            }
-        });
     }
-
-    /**
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d("PokedexDebug", "onStop() method PokeDetailsScreen");
-        PokeDetailsScreen.this.finish();
-        System.exit(0);
-    }
-    **/
 }

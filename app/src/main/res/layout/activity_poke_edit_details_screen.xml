@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".PokeEditDetailsScreen">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="270dp">
+
+        <ImageView
+            android:id="@+id/imageView_pokemonAvatarEditScreen"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="42dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/textView_shortForNumberBoxEditScreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="5dp"
+            android:paddingTop="5dp"
+            android:text="No."
+            android:textSize="26dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView_pokemonAvatarEditScreen" />
+
+        <TextView
+            android:id="@+id/textView_pokeNumberEditScreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:text="###"
+            android:textSize="30dp"
+            app:layout_constraintStart_toEndOf="@+id/textView_shortForNumberBoxEditScreen"
+            app:layout_constraintTop_toBottomOf="@+id/imageView_pokemonAvatarEditScreen" />
+
+        <EditText
+            android:id="@+id/textView_pokeNameEditScreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="42dp"
+            android:text="Pokemon Name"
+            android:textSize="26dp"
+            app:layout_constraintStart_toEndOf="@+id/imageView_pokemonAvatarEditScreen"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/textView_pokeDescriptionEditScreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:textSize="26dp"
+            android:text="Description"
+            app:layout_constraintStart_toEndOf="@+id/imageView_pokemonAvatarEditScreen"
+            app:layout_constraintTop_toBottomOf="@+id/textView_pokeNameEditScreen" />
+
+        <TextView
+            android:id="@+id/textView_htHardcodedBoxEditScreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="6dp"
+            android:text="HT"
+            android:textSize="30dp"
+            app:layout_constraintStart_toEndOf="@+id/imageView_pokemonAvatarEditScreen"
+            app:layout_constraintTop_toBottomOf="@+id/textView_pokeDescriptionEditScreen" />
+
+        <TextView
+            android:id="@+id/textView_wtHardcodedBoxEditScreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="15dp"
+            android:text="WT"
+            android:textSize="30dp"
+            app:layout_constraintStart_toEndOf="@+id/imageView_pokemonAvatarEditScreen"
+            app:layout_constraintTop_toBottomOf="@+id/textView_htHardcodedBoxEditScreen" />
+
+        <EditText
+            android:id="@+id/textView_pokeHeightEditScreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+
+            android:text="###"
+            android:textSize="26dp"
+            app:layout_constraintStart_toEndOf="@+id/textView_htHardcodedBoxEditScreen"
+            app:layout_constraintTop_toBottomOf="@+id/textView_pokeDescriptionEditScreen" />
+
+        <TextView
+            android:id="@+id/textView_meterSymbolHardcodedBoxEditScreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="62dp"
+            android:text="m"
+            android:textSize="30dp"
+            app:layout_constraintStart_toEndOf="@+id/textView_pokeHeightEditScreen"
+            app:layout_constraintTop_toBottomOf="@+id/textView_pokeNameEditScreen" />
+
+        <EditText
+            android:id="@+id/textView_pokeWeightEditScreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="26dp"
+            android:text="###.#"
+            android:textSize="26dp"
+            app:layout_constraintStart_toEndOf="@+id/textView_wtHardcodedBoxEditScreen"
+            app:layout_constraintTop_toBottomOf="@+id/textView_pokeHeightEditScreen" />
+
+        <TextView
+            android:id="@+id/textView_kgSymbolHardcodedBoxEditScreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="12dp"
+            android:text="kg"
+            android:textSize="30dp"
+            app:layout_constraintStart_toEndOf="@+id/textView_pokeWeightEditScreen"
+            app:layout_constraintTop_toBottomOf="@+id/textView_pokeHeightEditScreen" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <EditText
+        android:id="@+id/textView_pokeEntryDataEditScreen"
+        android:layout_width="match_parent"
+        android:layout_height="230dp"
+        android:textSize="30dp"
+        android:layout_margin="20dp"
+        android:text="Interesting information about the Pokemon..."/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/button_confirmEditScreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="Confirm" />
+        <Button
+            android:id="@+id/button_backEditScreen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:text="Back" />
+    </LinearLayout>
+</LinearLayout>
