@@ -77,7 +77,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void QuitApplication(View view) {
-        MainActivity.this.finish();
-        System.exit(0);
+        //MainActivity.this.finish();
+        finishAffinity();
+        //super.finish();
+        //System.exit(0);
     }
 }
