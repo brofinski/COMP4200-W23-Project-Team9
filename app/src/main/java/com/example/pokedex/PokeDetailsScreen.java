@@ -75,13 +75,4 @@ public class PokeDetailsScreen extends AppCompatActivity {
         });
     }
 
-    /**
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.d("PokedexDebug", "onStop() method PokeDetailsScreen");
-        PokeDetailsScreen.this.finish();
-        System.exit(0);
-    }
-    **/
 }

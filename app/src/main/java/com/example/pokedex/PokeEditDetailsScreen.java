@@ -120,15 +120,7 @@ public class PokeEditDetailsScreen extends AppCompatActivity {
             }
         });
     }
-    /**
-    private void populateEditDetailsScreenWithPokeDataObjectInformation() {
-        String inputName = et_pokemonName.getText().toString();
-        String inputDescription = et_pokemonDescription.getText().toString();
-        float inputHeight = Float.parseFloat(String.valueOf(et_pokemonHeight.getText()));
-        float inputWeight = Float.parseFloat(String.valueOf(et_pokemonWeight.getText()));
-        String inputEntryData = et_pokemonEntryData.getText().toString();
-    }
-     **/
+
     private void updateTheReceivedPokeDataObject(PokeData newPokeDataObject) {
         this.receivedPokeDataObject = newPokeDataObject;
     }
